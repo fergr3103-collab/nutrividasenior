@@ -1,0 +1,522 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:var(--color-background-tertiary);color:var(--color-text-primary)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+:root{--green-dark:#3B6D11;--green-mid:#639922;--green-light:#EAF3DE;--green-text:#27500A;--amber:#BA7517;--amber-light:#FAEEDA}
+
+nav{background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-secondary);padding:0 2rem;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-icon{width:40px;height:40px;background:#EAF3DE;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.logo-name{font-size:18px;font-weight:500;color:var(--green-dark)}
+.logo-sub{font-size:12px;color:var(--color-text-secondary)}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-btn{background:none;border:none;padding:8px 14px;border-radius:var(--border-radius-md);font-size:14px;color:var(--color-text-secondary);cursor:pointer;transition:background 0.15s}
+.nav-btn:hover{background:var(--color-background-secondary);color:var(--color-text-primary)}
+.nav-btn:focus{outline:3px solid #639922;outline-offset:2px}
+.nav-cta{background:#639922;color:#fff;border-radius:var(--border-radius-md);padding:9px 18px;font-size:14px;font-weight:500;border:none;cursor:pointer}
+.nav-cta:hover{background:#3B6D11}
+.nav-cta:focus{outline:3px solid #639922;outline-offset:3px}
+
+.hero{background:linear-gradient(135deg,#EAF3DE 0%,#C0DD97 100%);padding:4rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;min-height:420px}
+.hero-text h1{font-size:32px;font-weight:500;color:var(--green-text);line-height:1.2;margin-bottom:1rem}
+.hero-text .highlight{color:#3B6D11}
+.hero-text p{font-size:17px;line-height:1.7;color:var(--green-text);margin-bottom:1.5rem;max-width:480px}
+.hero-badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.5rem}
+.badge{padding:6px 14px;border-radius:20px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px}
+.badge-green{background:#C0DD97;color:#27500A}
+.badge-amber{background:#FAC775;color:#633806}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{background:#639922;color:#fff;padding:14px 28px;border-radius:var(--border-radius-md);font-size:16px;font-weight:500;border:none;cursor:pointer;display:flex;align-items:center;gap:8px}
+.btn-primary:hover{background:#3B6D11}
+.btn-primary:focus{outline:3px solid #3B6D11;outline-offset:3px}
+.btn-secondary{background:var(--color-background-primary);color:var(--green-dark);padding:14px 28px;border-radius:var(--border-radius-md);font-size:16px;font-weight:500;border:2px solid #639922;cursor:pointer;display:flex;align-items:center;gap:8px}
+.btn-secondary:hover{background:#EAF3DE}
+.btn-secondary:focus{outline:3px solid #639922;outline-offset:3px}
+.hero-img{border-radius:var(--border-radius-lg);overflow:hidden;height:300px;background:#C0DD97;display:flex;align-items:center;justify-content:center;font-size:80px}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+
+.section{padding:3rem 2rem}
+.section-alt{background:var(--color-background-secondary)}
+.section-title{font-size:24px;font-weight:500;color:var(--color-text-primary);margin-bottom:0.5rem;text-align:center}
+.section-sub{font-size:16px;color:var(--color-text-secondary);text-align:center;margin-bottom:2.5rem;line-height:1.6}
+
+.problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;max-width:860px;margin:0 auto}
+.problem-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem;display:flex;flex-direction:column;gap:10px}
+.icon-circle{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.ic-green{background:#EAF3DE}
+.ic-amber{background:#FAEEDA}
+.ic-red{background:#FCEBEB}
+.problem-card h3{font-size:15px;font-weight:500;color:var(--color-text-primary)}
+.problem-card p{font-size:14px;color:var(--color-text-secondary);line-height:1.6}
+
+.audience-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;max-width:860px;margin:0 auto}
+.audience-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.5rem 1.25rem;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
+.aud-icon{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px}
+.audience-card h3{font-size:15px;font-weight:500;color:var(--color-text-primary)}
+.audience-card p{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+
+.valor-wrap{max-width:760px;margin:0 auto}
+.valor-header{background:#EAF3DE;border-radius:var(--border-radius-lg);padding:1.5rem 2rem;margin-bottom:1.5rem;text-align:center}
+.valor-header p{font-size:16px;color:#27500A;line-height:1.7}
+.valor-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.valor-item{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:12px}
+.check{width:24px;height:24px;border-radius:50%;background:#EAF3DE;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.valor-item p{font-size:14px;color:var(--color-text-secondary);line-height:1.6}
+.valor-item strong{display:block;font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px}
+
+.menu-wrap{max-width:860px;margin:0 auto}
+.menu-day{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;margin-bottom:16px}
+.menu-header{background:#EAF3DE;padding:0.75rem 1.25rem;display:flex;align-items:center;gap:10px}
+.menu-header h3{font-size:15px;font-weight:500;color:#27500A}
+.menu-body{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0}
+.meal{padding:1rem 1.25rem;border-right:0.5px solid var(--color-border-tertiary);border-bottom:0.5px solid var(--color-border-tertiary)}
+.meal:last-child{border-right:none}
+.meal-label{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px}
+.meal p{font-size:13px;color:var(--color-text-primary);line-height:1.6}
+
+.receta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;max-width:860px;margin:0 auto}
+.receta-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.receta-img{height:160px;background:#EAF3DE;display:flex;align-items:center;justify-content:center;font-size:60px}
+.receta-body{padding:1.25rem}
+.receta-body h3{font-size:15px;font-weight:500;margin-bottom:6px;color:var(--color-text-primary)}
+.receta-body p{font-size:13px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:12px}
+.receta-tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{padding:4px 10px;border-radius:20px;font-size:12px;font-weight:500;background:#EAF3DE;color:#27500A}
+
+.ingresos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:860px;margin:0 auto}
+.ingreso-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.5rem 1.25rem;display:flex;flex-direction:column;gap:10px}
+.num-badge{width:32px;height:32px;border-radius:50%;background:#EAF3DE;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;color:#27500A;flex-shrink:0}
+.ingreso-card h3{font-size:15px;font-weight:500;color:var(--color-text-primary)}
+.ingreso-card p{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+
+.accesibilidad-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:860px;margin:0 auto}
+.pour-card{border-radius:var(--border-radius-lg);padding:1.5rem 1.25rem;display:flex;flex-direction:column;gap:8px}
+.pour-p{background:#EAF3DE;border:0.5px solid #97C459}
+.pour-o{background:#FAEEDA;border:0.5px solid #EF9F27}
+.pour-u{background:#E6F1FB;border:0.5px solid #85B7EB}
+.pour-r{background:#FBEAF0;border:0.5px solid #ED93B1}
+.pour-card .pour-letter{font-size:28px;font-weight:500}
+.pour-p .pour-letter{color:#27500A}
+.pour-o .pour-letter{color:#633806}
+.pour-u .pour-letter{color:#042C53}
+.pour-r .pour-letter{color:#4B1528}
+.pour-card h3{font-size:15px;font-weight:500}
+.pour-p h3{color:#27500A}
+.pour-o h3{color:#633806}
+.pour-u h3{color:#042C53}
+.pour-r h3{color:#4B1528}
+.pour-card ul{padding-left:16px;display:flex;flex-direction:column;gap:4px}
+.pour-card li{font-size:13px;line-height:1.5}
+.pour-p li{color:#3B6D11}
+.pour-o li{color:#854F0B}
+.pour-u li{color:#0C447C}
+.pour-r li{color:#72243E}
+
+.contacto-wrap{max-width:600px;margin:0 auto;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:2rem}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.form-group label{font-size:14px;font-weight:500;color:var(--color-text-primary)}
+.form-group input,.form-group select,.form-group textarea{padding:10px 12px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);font-size:15px;font-family:var(--font-sans);color:var(--color-text-primary);background:var(--color-background-primary)}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:3px solid #639922;outline-offset:1px}
+.form-hint{font-size:12px;color:var(--color-text-secondary)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.submit-btn{width:100%;background:#639922;color:#fff;padding:14px;border-radius:var(--border-radius-md);font-size:16px;font-weight:500;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px}
+.submit-btn:hover{background:#3B6D11}
+.submit-btn:focus{outline:3px solid #3B6D11;outline-offset:3px}
+
+.footer{background:#27500A;color:#C0DD97;padding:2.5rem 2rem;text-align:center}
+.footer-logo{font-size:20px;font-weight:500;color:#fff;margin-bottom:0.5rem}
+.footer-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin:1rem 0;font-size:14px}
+.footer-links a{color:#97C459;text-decoration:none}
+.footer-links a:hover{color:#fff;text-decoration:underline}
+.footer-links a:focus{outline:2px solid #97C459;outline-offset:2px;border-radius:2px}
+.footer p{font-size:13px;color:#97C459}
+
+.whatsapp-fab{position:fixed;bottom:24px;right:24px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;border:none;cursor:pointer;box-shadow:none;z-index:200}
+.whatsapp-fab:focus{outline:3px solid #25D366;outline-offset:3px}
+
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:0}
+.text-center{text-align:center}
+.mt-2{margin-top:2rem}
+</style>
+
+<h2 class="sr-only">Sitio web NutriVida Senior — Alimentación saludable para adultos mayores</h2>
+
+<nav role="navigation" aria-label="Navegación principal">
+  <a href="#inicio" class="logo" aria-label="NutriVida Senior — Ir al inicio">
+    <div class="logo-icon" aria-hidden="true"><i class="ti ti-leaf" style="font-size:20px;color:#3B6D11"></i></div>
+    <div>
+      <div class="logo-name">NutriVida Senior</div>
+      <div class="logo-sub">Alimentación con propósito</div>
+    </div>
+  </a>
+  <div class="nav-links" role="menubar">
+    <button class="nav-btn" role="menuitem" onclick="document.getElementById('problema').scrollIntoView({behavior:'smooth'})">El problema</button>
+    <button class="nav-btn" role="menuitem" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Menús</button>
+    <button class="nav-btn" role="menuitem" onclick="document.getElementById('recetas').scrollIntoView({behavior:'smooth'})">Recetas</button>
+    <button class="nav-btn" role="menuitem" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Contacto</button>
+    <button class="nav-cta" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">
+      <i class="ti ti-heart" aria-hidden="true"></i> Suscribirme
+    </button>
+  </div>
+</nav>
+
+<section id="inicio" class="hero" aria-labelledby="hero-heading">
+  <div class="hero-text">
+    <div class="hero-badges">
+      <span class="badge badge-green" role="note"><i class="ti ti-check" aria-hidden="true"></i> Menús gratuitos disponibles</span>
+      <span class="badge badge-amber" role="note"><i class="ti ti-star" aria-hidden="true"></i> Supervisado por nutriólogos</span>
+    </div>
+    <h1 id="hero-heading">Comer bien<br><span class="highlight">nunca fue tan fácil</span></h1>
+    <p>Menús balanceados, accesibles y adaptados a tus necesidades de salud. Pensados especialmente para adultos mayores con diabetes, hipertensión u otras condiciones médicas.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})" aria-label="Ver los menús saludables de esta semana">
+        <i class="ti ti-salad" aria-hidden="true"></i> Ver menús de esta semana
+      </button>
+      <button class="btn-secondary" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})" aria-label="Contactar a NutriVida Senior">
+        <i class="ti ti-phone" aria-hidden="true"></i> Hablar con nosotros
+      </button>
+    </div>
+  </div>
+  <div class="hero-img" role="img" aria-label="Ilustración de alimentos saludables y coloridos: frutas, verduras y proteínas para adultos mayores">
+    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80" alt="Plato de ensalada colorida con vegetales frescos, tomate, pepino y proteínas" loading="eager" style="width:100%;height:100%;object-fit:cover;border-radius:var(--border-radius-lg)" onerror="this.style.display='none';this.parentElement.innerHTML='🥗'">
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="problema" class="section" aria-labelledby="problema-heading">
+  <h2 id="problema-heading" class="section-title">¿Por qué creamos NutriVida Senior?</h2>
+  <p class="section-sub">Muchos adultos mayores enfrentan barreras reales para comer bien.<br>Las identificamos y las resolvemos.</p>
+  <div class="problem-grid" role="list">
+    <article class="problem-card" role="listitem">
+      <div class="icon-circle ic-red" aria-hidden="true"><i class="ti ti-book-off" style="font-size:20px;color:#A32D2D"></i></div>
+      <h3>Falta de información nutricional</h3>
+      <p>Muchos adultos mayores no saben qué alimentos son adecuados para su condición de salud específica.</p>
+    </article>
+    <article class="problem-card" role="listitem">
+      <div class="icon-circle ic-amber" aria-hidden="true"><i class="ti ti-armchair" style="font-size:20px;color:#854F0B"></i></div>
+      <h3>Limitaciones físicas</h3>
+      <p>Preparar comida puede ser difícil cuando hay movilidad reducida, fatiga o condiciones crónicas.</p>
+    </article>
+    <article class="problem-card" role="listitem">
+      <div class="icon-circle ic-amber" aria-hidden="true"><i class="ti ti-clock" style="font-size:20px;color:#854F0B"></i></div>
+      <h3>Cuidadores sin tiempo</h3>
+      <p>Los familiares que cuidan adultos mayores muchas veces no cuentan con el tiempo para planear menús saludables.</p>
+    </article>
+    <article class="problem-card" role="listitem">
+      <div class="icon-circle ic-red" aria-hidden="true"><i class="ti ti-currency-dollar-off" style="font-size:20px;color:#A32D2D"></i></div>
+      <h3>Alto costo de alimentos sanos</h3>
+      <p>La alimentación saludable suele verse como un lujo fuera del alcance de personas con bajos ingresos.</p>
+    </article>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section section-alt" aria-labelledby="audiencia-heading">
+  <h2 id="audiencia-heading" class="section-title">¿Para quién es NutriVida Senior?</h2>
+  <p class="section-sub">Nuestro servicio está diseñado para cuatro grupos principales.</p>
+  <div class="audience-grid" role="list">
+    <article class="audience-card" role="listitem">
+      <div class="aud-icon" style="background:#EAF3DE;font-size:28px" aria-hidden="true">👴</div>
+      <h3>Adultos mayores</h3>
+      <p>Con necesidades nutricionales específicas y mayor vulnerabilidad ante problemas de salud.</p>
+    </article>
+    <article class="audience-card" role="listitem">
+      <div class="aud-icon" style="background:#FAEEDA;font-size:28px" aria-hidden="true">🩺</div>
+      <h3>Diabetes e hipertensión</h3>
+      <p>Personas diagnosticadas que requieren control alimenticio constante y orientación especializada.</p>
+    </article>
+    <article class="audience-card" role="listitem">
+      <div class="aud-icon" style="background:#E6F1FB;font-size:28px" aria-hidden="true">👨‍👩‍👧</div>
+      <h3>Familias saludables</h3>
+      <p>Hogares que buscan mejorar sus hábitos alimenticios de forma colectiva y sostenible.</p>
+    </article>
+    <article class="audience-card" role="listitem">
+      <div class="aud-icon" style="background:#FCEBEB;font-size:28px" aria-hidden="true">🤝</div>
+      <h3>Personas con bajos recursos</h3>
+      <p>Quienes necesitan opciones económicas sin sacrificar la calidad nutricional.</p>
+    </article>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section" aria-labelledby="valor-heading">
+  <h2 id="valor-heading" class="section-title">Lo que te ofrecemos</h2>
+  <p class="section-sub">Nuestra promesa de valor: comida real, accesible y diseñada para tu salud.</p>
+  <div class="valor-wrap">
+    <div class="valor-header" role="note">
+      <p>NutriVida Senior ofrece comidas saludables, accesibles y adaptadas a las necesidades nutricionales de adultos mayores, especialmente a quienes viven con enfermedades crónicas.</p>
+    </div>
+    <div class="valor-grid" role="list">
+      <div class="valor-item" role="listitem">
+        <div class="check" aria-hidden="true"><i class="ti ti-check" style="font-size:14px;color:#3B6D11"></i></div>
+        <div><strong>Menús balanceados</strong>Supervisados nutricionalmente por profesionales de la salud.</div>
+      </div>
+      <div class="valor-item" role="listitem">
+        <div class="check" aria-hidden="true"><i class="ti ti-check" style="font-size:14px;color:#3B6D11"></i></div>
+        <div><strong>Bajo en azúcar y sodio</strong>Recetas con poco contenido de azúcar, sodio y grasas saturadas.</div>
+      </div>
+      <div class="valor-item" role="listitem">
+        <div class="check" aria-hidden="true"><i class="ti ti-check" style="font-size:14px;color:#3B6D11"></i></div>
+        <div><strong>Fácil de preparar y digerir</strong>Comidas sencillas, con pasos claros y aptas para el sistema digestivo del adulto mayor.</div>
+      </div>
+      <div class="valor-item" role="listitem">
+        <div class="check" aria-hidden="true"><i class="ti ti-check" style="font-size:14px;color:#3B6D11"></i></div>
+        <div><strong>Menús base gratuitos</strong>Acceso a menús semanales sin costo, con planes de suscripción personalizados disponibles.</div>
+      </div>
+      <div class="valor-item" role="listitem">
+        <div class="check" aria-hidden="true"><i class="ti ti-check" style="font-size:14px;color:#3B6D11"></i></div>
+        <div><strong>Control de glucosa</strong>Alimentos seleccionados para ayudar a mantener niveles estables de glucosa en sangre.</div>
+      </div>
+      <div class="valor-item" role="listitem">
+        <div class="check" aria-hidden="true"><i class="ti ti-check" style="font-size:14px;color:#3B6D11"></i></div>
+        <div><strong>Mejor calidad de vida</strong>Una alimentación adecuada reduce complicaciones y mejora el bienestar general.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="menu" class="section section-alt" aria-labelledby="menu-heading">
+  <h2 id="menu-heading" class="section-title">Menú balanceado de la semana</h2>
+  <p class="section-sub">Cinco días de alimentación saludable, pensada para adultos mayores.<br>Bajo en azúcar, sodio y grasas saturadas.</p>
+  <div class="menu-wrap" role="region" aria-label="Menú semanal NutriVida Senior">
+    <div class="menu-day">
+      <div class="menu-header"><span aria-hidden="true">🥗</span><h3>Lunes</h3></div>
+      <div class="menu-body">
+        <div class="meal"><div class="meal-label">Desayuno</div><p>2 huevos revueltos con espinaca · pan integral · té sin azúcar</p></div>
+        <div class="meal"><div class="meal-label">Almuerzo</div><p>Pechuga de pollo a la plancha · ½ taza arroz integral · ensalada verde</p></div>
+        <div class="meal"><div class="meal-label">Cena</div><p>Sopa de verduras · 1 tortilla integral</p></div>
+        <div class="meal"><div class="meal-label">Meriendas</div><p>Manzana pequeña · yogurt natural sin azúcar</p></div>
+      </div>
+    </div>
+    <div class="menu-day">
+      <div class="menu-header"><span aria-hidden="true">🍲</span><h3>Martes</h3></div>
+      <div class="menu-body">
+        <div class="meal"><div class="meal-label">Desayuno</div><p>Avena con canela y manzana picada · leche descremada</p></div>
+        <div class="meal"><div class="meal-label">Almuerzo</div><p>Pescado al vapor con limón · ensalada de nopal · tortilla de maíz</p></div>
+        <div class="meal"><div class="meal-label">Cena</div><p>Quesadilla integral con champiñones · té de manzanilla</p></div>
+        <div class="meal"><div class="meal-label">Meriendas</div><p>Plátano · nueces (puñado pequeño)</p></div>
+      </div>
+    </div>
+    <div class="menu-day">
+      <div class="menu-header"><span aria-hidden="true">🥦</span><h3>Miércoles</h3></div>
+      <div class="menu-body">
+        <div class="meal"><div class="meal-label">Desayuno</div><p>Licuado de papaya con agua · tostada integral con aguacate</p></div>
+        <div class="meal"><div class="meal-label">Almuerzo</div><p>Frijoles negros con epazote · arroz rojo · calabaza hervida</p></div>
+        <div class="meal"><div class="meal-label">Cena</div><p>Caldo de pollo con verduras · pan integral</p></div>
+        <div class="meal"><div class="meal-label">Meriendas</div><p>Jícama con limón · gelatina natural sin azúcar</p></div>
+      </div>
+    </div>
+  </div>
+  <p class="text-center mt-2" style="font-size:14px;color:var(--color-text-secondary)">
+    <i class="ti ti-info-circle" aria-hidden="true"></i> Los menús son sugerencias generales. Consulta con tu médico antes de hacer cambios importantes en tu dieta.
+  </p>
+</section>
+
+<div class="divider"></div>
+
+<section id="recetas" class="section" aria-labelledby="recetas-heading">
+  <h2 id="recetas-heading" class="section-title">Recetas destacadas</h2>
+  <p class="section-sub">Preparaciones sencillas, nutritivas y ricas en sabor.<br>Instrucciones claras paso a paso.</p>
+  <div class="receta-grid">
+    <article class="receta-card" aria-label="Receta: Ensalada de atún saludable">
+      <div class="receta-img" role="img" aria-label="Fotografía de ensalada de atún con vegetales frescos">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80" alt="Ensalada colorida con atún, lechuga, tomate, pepino y aguacate en un plato blanco" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentElement.innerHTML='🥗'">
+      </div>
+      <div class="receta-body">
+        <h3>Ensalada de atún saludable</h3>
+        <p>Atún en agua, lechuga, tomate, pepino, aguacate y jugo de limón. Rica en proteínas y fibra. Ideal para controlar la glucosa.</p>
+        <div class="receta-tags">
+          <span class="tag">Baja en azúcar</span>
+          <span class="tag">Alta proteína</span>
+          <span class="tag">Control glucosa</span>
+        </div>
+      </div>
+    </article>
+    <article class="receta-card" aria-label="Receta: Sopa de verduras reconfortante">
+      <div class="receta-img" role="img" aria-label="Fotografía de sopa de verduras caliente">
+        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&q=80" alt="Tazón de sopa de verduras humeante con zanahorias, calabaza y espinacas" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentElement.innerHTML='🍲'">
+      </div>
+      <div class="receta-body">
+        <h3>Sopa de verduras reconfortante</h3>
+        <p>Zanahoria, calabaza, espinaca, apio y caldo de pollo bajo en sodio. Fácil de digerir y muy nutritiva para cualquier momento del día.</p>
+        <div class="receta-tags">
+          <span class="tag">Baja en sodio</span>
+          <span class="tag">Fácil digestión</span>
+          <span class="tag">Antioxidantes</span>
+        </div>
+      </div>
+    </article>
+    <article class="receta-card" aria-label="Receta: Pollo a la plancha con vegetales">
+      <div class="receta-img" role="img" aria-label="Fotografía de pollo a la plancha con guarnición de vegetales">
+        <img src="https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=400&q=80" alt="Pechuga de pollo dorada a la plancha servida con brócoli y zanahoria al vapor" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentElement.innerHTML='🍗'">
+      </div>
+      <div class="receta-body">
+        <h3>Pollo a la plancha con vegetales</h3>
+        <p>Pechuga de pollo marinada con limón, ajo y hierbas. Acompañada de brócoli y zanahoria al vapor. Alta en proteínas y calcio.</p>
+        <div class="receta-tags">
+          <span class="tag">Alta proteína</span>
+          <span class="tag">Sin fritura</span>
+          <span class="tag">Calcio</span>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section section-alt" aria-labelledby="ingresos-heading">
+  <h2 id="ingresos-heading" class="section-title">Nuestros servicios</h2>
+  <p class="section-sub">Cuatro formas de acceder a una alimentación más saludable.</p>
+  <div class="ingresos-grid" role="list">
+    <article class="ingreso-card" role="listitem">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="num-badge" aria-hidden="true">1</div>
+        <i class="ti ti-shopping-bag" style="font-size:20px;color:#3B6D11" aria-hidden="true"></i>
+      </div>
+      <h3>Venta de comida saludable</h3>
+      <p>Comercialización directa de productos nutritivos listos para consumir o preparar.</p>
+    </article>
+    <article class="ingreso-card" role="listitem">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="num-badge" aria-hidden="true">2</div>
+        <i class="ti ti-calendar-repeat" style="font-size:20px;color:#3B6D11" aria-hidden="true"></i>
+      </div>
+      <h3>Suscripciones familiares</h3>
+      <p>Planes alimenticios mensuales o semanales personalizados para toda la familia.</p>
+    </article>
+    <article class="ingreso-card" role="listitem">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="num-badge" aria-hidden="true">3</div>
+        <i class="ti ti-school" style="font-size:20px;color:#3B6D11" aria-hidden="true"></i>
+      </div>
+      <h3>Talleres y asesorías</h3>
+      <p>Servicios nutricionales pagados, grupales o individuales, con especialistas certificados.</p>
+    </article>
+    <article class="ingreso-card" role="listitem">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="num-badge" aria-hidden="true">4</div>
+        <i class="ti ti-building-hospital" style="font-size:20px;color:#3B6D11" aria-hidden="true"></i>
+      </div>
+      <h3>Alianzas estratégicas</h3>
+      <p>Colaboraciones con clínicas, farmacias y casas de retiro para ampliar el alcance.</p>
+    </article>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section" aria-labelledby="pour-heading">
+  <h2 id="pour-heading" class="section-title">Diseñado para todos — Accesibilidad POUR</h2>
+  <p class="section-sub">Este sitio fue construido siguiendo los cuatro principios de accesibilidad web,<br>para que cualquier persona pueda usarlo sin barreras.</p>
+  <div class="accesibilidad-grid" role="list">
+    <article class="pour-card pour-p" role="listitem" aria-label="Perceptible">
+      <div class="pour-letter" aria-hidden="true">P</div>
+      <h3>Perceptible</h3>
+      <ul>
+        <li>Texto grande y alto contraste</li>
+        <li>Alt text en todas las imágenes</li>
+        <li>Jerarquía visual clara (H1, H2, H3)</li>
+        <li>Compatible con lectores de pantalla</li>
+      </ul>
+    </article>
+    <article class="pour-card pour-o" role="listitem" aria-label="Operable">
+      <div class="pour-letter" aria-hidden="true">O</div>
+      <h3>Operable</h3>
+      <ul>
+        <li>Navegable con teclado (Tab)</li>
+        <li>Botones grandes y fáciles de tocar</li>
+        <li>Sin contenido con tiempo límite</li>
+        <li>Foco visible en todos los elementos</li>
+      </ul>
+    </article>
+    <article class="pour-card pour-u" role="listitem" aria-label="Comprensible">
+      <div class="pour-letter" aria-hidden="true">U</div>
+      <h3>Comprensible</h3>
+      <ul>
+        <li>Lenguaje sencillo, sin tecnicismos</li>
+        <li>Instrucciones claras paso a paso</li>
+        <li>Mensajes de error explicativos</li>
+        <li>Consistencia en diseño y flujo</li>
+      </ul>
+    </article>
+    <article class="pour-card pour-r" role="listitem" aria-label="Robusto">
+      <div class="pour-letter" aria-hidden="true">R</div>
+      <h3>Robusto</h3>
+      <ul>
+        <li>Funciona en dispositivos antiguos</li>
+        <li>Diseño responsivo (móvil/tablet)</li>
+        <li>Compatible con TalkBack y NVDA</li>
+        <li>Carga rápida en conexiones lentas</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contacto" class="section section-alt" aria-labelledby="contacto-heading">
+  <h2 id="contacto-heading" class="section-title">Solicita tu menú o escríbenos</h2>
+  <p class="section-sub">Llenando este formulario recibirás tu primer menú semanal sin costo.<br>También puedes escribirnos por WhatsApp al número al final de la página.</p>
+  <div class="contacto-wrap">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="nombre">Tu nombre completo</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Ej. María González" autocomplete="name" aria-required="true">
+      </div>
+      <div class="form-group">
+        <label for="edad">Edad</label>
+        <input type="number" id="edad" name="edad" placeholder="Ej. 68" min="18" max="110" aria-required="true" aria-describedby="edad-hint">
+        <span id="edad-hint" class="form-hint">Ingresa solo números, sin letras.</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="telefono">Teléfono o WhatsApp</label>
+      <input type="tel" id="telefono" name="telefono" placeholder="Ej. 55 1234 5678" autocomplete="tel" aria-required="true" aria-describedby="tel-hint">
+      <span id="tel-hint" class="form-hint">Escribe 10 dígitos. Te contactaremos por WhatsApp.</span>
+    </div>
+    <div class="form-group">
+      <label for="condicion">¿Tienes alguna condición de salud?</label>
+      <select id="condicion" name="condicion" aria-required="true">
+        <option value="">Selecciona una opción</option>
+        <option value="diabetes">Diabetes</option>
+        <option value="hipertension">Hipertensión</option>
+        <option value="ambas">Diabetes e hipertensión</option>
+        <option value="otra">Otra condición</option>
+        <option value="ninguna">Sin condición diagnosticada</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="mensaje">¿Algo más que debamos saber? (opcional)</label>
+      <textarea id="mensaje" name="mensaje" rows="3" placeholder="Ej. Tengo dificultad para masticar. Me gustaría recetas suaves." aria-describedby="msg-hint"></textarea>
+      <span id="msg-hint" class="form-hint">Puedes escribir alergias, preferencias o cualquier información útil.</span>
+    </div>
+    <button class="submit-btn" type="button" onclick="sendPrompt('Quiero saber más sobre los planes de suscripción de NutriVida Senior')" aria-label="Enviar formulario y solicitar mi menú gratuito">
+      <i class="ti ti-send" aria-hidden="true"></i> Solicitar mi menú gratuito ↗
+    </button>
+  </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+  <p class="footer-logo">🌿 NutriVida Senior</p>
+  <p style="font-size:14px;color:#97C459;margin-bottom:0.75rem">Alimentación saludable para adultos mayores · Universidad del Valle de México</p>
+  <nav class="footer-links" aria-label="Enlaces del pie de página">
+    <a href="#inicio">Inicio</a>
+    <a href="#menu">Menús</a>
+    <a href="#recetas">Recetas</a>
+    <a href="#contacto">Contacto</a>
+    <a href="#pour-heading">Accesibilidad</a>
+  </nav>
+  <p>📞 WhatsApp: 55 1234 5678 &nbsp;|&nbsp; 📧 nutrivida@ejemplo.com</p>
+  <p style="margin-top:0.75rem;font-size:12px;color:#639922">Ana Fernanda Guevara Rodríguez · Xiomara Marlyn Ruvalcaba Tapia · Mtra. Adriana Posada Ramírez · 2026</p>
+</footer>
+
+<button class="whatsapp-fab" aria-label="Contáctanos por WhatsApp" onclick="alert('WhatsApp: 55 1234 5678')">
+  <i class="ti ti-brand-whatsapp" style="font-size:26px" aria-hidden="true"></i>
+</button>
